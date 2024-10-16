@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Story</title>
+    <style>
+        body {
+            background-color: #fffafc;
+            font-family: 'Arial', sans-serif;
+            color: #ff79a0;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .envelope {
+            width: 150px;
+            height: 100px;
+            background-color: #ffccd5;
+            border-radius: 10px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .envelope::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 75px 50px 75px;
+            border-color: transparent transparent #ffccd5 transparent;
+            top: -50px;
+        }
+        .heart {
+            color: red;
+            font-size: 24px;
+        }
+        img {
+            max-width: 80%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #fff;
+            color: #ff79a0;
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #ffccd5;
+        }
+        .caption {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- หน้าแรก: ซองจดหมาย -->
+    <div class="envelope" onclick="nextPage()">
+        <span class="heart">❤️</span>
+    </div>
+    <p>ลองกดดูงับ</p>
+</div>
+
+<script>
+    let currentPage = 0;
+    const pages = [
+        {
+            img: 'flower.jpg', // ใส่ลิงก์รูปภาพที่นี่
+            caption: 'นี้อ้วนได้ดอกไม้วันแรกจากเค้า ❤️'
+        },
+        {
+            img: 'wash_car.jpg', // ใส่ลิงก์รูปภาพที่นี่
+            caption: 'นี้อ้วนไปล้างรถกับเค้าแกล้งเค้าด้วย'
+        },
+        {
+            img: 'movie.jpg', // ใส่ลิงก์รูปภาพที่นี่
+            caption: 'ไปนั่งดูหนังกลางแปลงกันตรงลานจับแก้มน่ารักมาก'
+        },
+        {
+            img: 'hug.jpg', // ใส่ลิงก์รูปภาพที่นี่
+            caption: 'อ้วนอนกอดเค้าน่ารักมาก ฟินร'
+        },
+        {
+            img: 'mirror_selfie.jpg', // ใส่ลิงก์รูปภาพที่นี่
+            caption: 'อ้วนถ่ายรูปกับเค้าหน้ากระจก เขินมากตอนนั้น'
+        },
+        {
+            img: 'river_nan.jpg', // ใส่ลิงก์รูปภาพที่นี่
+            caption: 'รูปนี้เราไปริมน่านด้วยกันนนนนครั้งแรกกเลย'
+        },
+        {
+            img: 'temple_visit.jpg', // ใส่ลิงก์รูปภาพที่นี่
+            caption: 'เค้ามารับอ้วนกลับจากบ้านเราไปวัดใหญ่กันนนทำบุญด้วยละ'
+        },
+        {
+            img: 'first_movie.jpg', // ใส่ลิงก์รูปภาพที่นี่
+            caption: 'เราไปดูหนังด้วยกันเรื่องเเรกกกก ตอนนั้นฟินมากกก'
+        },
+        {
+            img: 'candy.jpg', // ใส่ลิงก์รูปภาพที่นี่
+            caption: 'รูปนี้เราไปครามด้วยกันหวานมั้ยละะ'
+        },
+        {
+            img: 'baby_turtle.jpg', // ใส่ลิงก์รูปภาพที่นี่
+            caption: 'เราได้ลูกชายแรกกกชื่อไข่เต่าอ้อนมากกกน่ารักกสุบบบ'
+        },
+        {
+            img: 'nakhon_sawan.jpg', // ใส่ลิงก์รูปภาพที่นี่
+            caption: 'เราไปนครสวรรค์กัน ไปเที่ยวคาเฟ่ สนุกเลยยอ้วนอะะ'
+        },
+        {
+            img: 'baby_tree.jpg', // ใส่ลิงก์รูปภาพที่นี่
+            caption: 'เราได้เบบี้ทรี ที่อ้วนอยากได้ v2 น่ารักมะ'
+        },
+        {
+            img: 'waterfall.jpg', // ใส่ลิงก์รูปภาพที่นี่
+            caption: 'เราไปเที่ยวน้ำตกกันนครั้งแรกก เล่นน้ำกันนพาอ้วนเที่ยววว'
+        },
+        {
+            img: 'love_Thai_house.jpg', // ใส่ลิงก์รูปภาพที่นี่
+            caption: 'เราไปเที่ยวบ้านรักไทยกัน อ้วนกรี๊ดดด'
+        },
+        {
+            img: 'aunt_visited.jpg', // ใส่ลิงก์รูปภาพที่นี่
+            caption: 'เค้าพาอ้วนไปบ้านป้าแตนนน แง๊นนๆๆๆ'
+        },
+        {
+            img: 'final_message.jpg', // ใส่ลิงก์รูปภาพที่นี่
+            caption: 'เขาอยากจะบอกอ้วนว่าเค้ารักอ้วนๆๆมากนะะเค้าอยากอยู่กับอ้วนนานๆๆ'
+        }
+    ];
+
+    function nextPage() {
+        currentPage++;
+        if (currentPage < pages.length) {
+            showPage(currentPage);
+        } else {
+            alert("จบแล้วจ้า!");
+        }
+    }
+
+    function showPage(pageIndex) {
+        const container = document.querySelector('.container');
+        container.innerHTML = `
+            <img src="${pages[pageIndex].img}" alt="Story Image" />
+            <p class="caption">${pages[pageIndex].caption}</p>
+            <button onclick="nextPage()">ไปหน้าต่อไป</button>
+        `;
+    }
+</script>
+
+</body>
+</html>
